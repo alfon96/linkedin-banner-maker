@@ -16,6 +16,7 @@ export const downloadBanner = async () => {
       transform: "none",
       boxShadow: "none",
     },
+
     pixelRatio: 3, // high-res export without layout distortion
   });
 
