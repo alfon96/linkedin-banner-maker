@@ -1,0 +1,28 @@
+.toolbarCnt {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 3rem;
+  width: 100%;
+  margin-top: 6rem;
+  width: 100%;
+  gap: 3rem;
+  padding: 0rem 12rem;
+  flex-direction: row;
+}
+
+.colorsCnt,
+.textDataCnt,
+.techStackInputCnt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+}
+
+.techStackInputCnt {
+  padding: 0rem 2rem 2rem 2rem;
+  overflow: hidden;
+}

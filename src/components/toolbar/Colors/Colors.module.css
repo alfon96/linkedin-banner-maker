@@ -1,0 +1,48 @@
+:root {
+  --size-color: 1.25rem;
+  --color-picker-bg: #b3b3b3;
+  --color-picker-bg-active: #fff;
+  --color-picker-bg-hover: #ddd;
+}
+
+.toolbarCnt {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0rem 2rem 2rem 2rem;
+}
+
+.colorButton {
+  padding: 0.25rem;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--color-picker-bg);
+  border: 2px solid #222;
+  border-radius: 0.5rem;
+}
+
+.colorButton:hover {
+  background-color: var(--color-picker-bg-hover);
+}
+
+.selected {
+  background-color: var(--color-picker-bg-active);
+}
+
+.colorLeft {
+  width: var(--size-color);
+  height: var(--size-color);
+  border-radius: 0.25rem;
+  flex: 1;
+}
+
+.colorRight {
+  flex: 1;
+  width: var(--size-color);
+  height: var(--size-color);
+  border-radius: 0.25rem;
+}

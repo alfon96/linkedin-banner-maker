@@ -1,0 +1,27 @@
+.navbarCnt {
+  height: 5rem;
+  width: 100%;
+  background-color: #cecece;
+  margin-bottom: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0rem 9rem;
+}
+
+.btn {
+  border: none;
+  background: linear-gradient(to top right, #0c63b4, #2ac1cc);
+  font-size: 1.1rem;
+  padding: 0.5rem 2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  color: #eee;
+  font-weight: 700;
+  text-shadow: 0px 10px 10px rgba(0, 0, 0, 0.082);
+  transition: transform ease-in-out 0.25s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}

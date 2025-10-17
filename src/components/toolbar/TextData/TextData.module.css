@@ -1,0 +1,16 @@
+.textDataCnt {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  grid-template-columns: 1fr 4fr;
+}
+
+.inputEl {
+  border: none;
+  border-radius: 1rem;
+  padding: 0.25rem 1rem;
+  font-size: 1rem;
+  color: #555;
+  font-style: italic;
+}
