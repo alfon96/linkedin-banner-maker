@@ -1,4 +1,4 @@
-import * as htmlToImage from "html-to-image";
+import * as domtoimage from "dom-to-image-more";
 
 export const downloadBanner = async () => {
   const banner = document.getElementById("banner");
@@ -6,21 +6,13 @@ export const downloadBanner = async () => {
 
   await document.fonts.ready;
 
-  // Capture at real on-screen size (no reflow)
-  const dataUrl = await htmlToImage.toPng(banner, {
-    backgroundColor: "transparent",
-    cacheBust: true,
-    style: {
-      margin: "0",
-      padding: "0",
-      transform: "none",
-      boxShadow: "none",
-    },
-
-    pixelRatio: 3, // high-res export without layout distortion
+  const dataUrl = await domtoimage.toPng(banner, {
+    bgcolor: "transparent",
+    style: { margin: 0, padding: 0 },
+    quality: 1,
+    scale: 3,
   });
 
-  // Download result
   const link = document.createElement("a");
   link.download = "linkedin-banner.png";
   link.href = dataUrl;
