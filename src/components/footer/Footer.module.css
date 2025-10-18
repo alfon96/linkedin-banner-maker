@@ -1,7 +1,9 @@
 .footerCnt {
   display: flex;
+  height: 7rem;
   width: 100%;
-  background-color: #bbb;
-  margin-top: auto;
-  padding: 2.5rem 9rem;
+  background-color: #1c9cd89c;
+  padding: 5rem 9rem;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
 }

@@ -20,6 +20,7 @@ const Banner = () => {
             style={{
               fontSize: `clamp(${1.25}rem,${textFontSize}vw, ${textFontSize}rem)`,
               color: colorTheme[selected][2],
+              maxWidth: `calc(25ch / ${textFontSize / 2.5})`,
             }}
           >
             {fullName}

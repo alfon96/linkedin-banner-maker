@@ -5,15 +5,18 @@ import TechStackInput from "./TechStack/TechStackInput";
 
 const Toolbar = () => {
   return (
-    <div className={classes.toolbarCnt}>
-      <div className={classes.colorsCnt}>
-        <Colors />
-      </div>
-      <div className={classes.textDataCnt}>
-        <TextData />
-      </div>
-      <div className={classes.techStackInputCnt}>
-        <TechStackInput />
+    <div className={classes.toolbarWrapper}>
+      <div className={classes.toolbarHeader}>Tools</div>
+      <div className={classes.toolbarCnt}>
+        <div className={classes.colorsCnt}>
+          <Colors />
+        </div>
+        <div className={classes.textDataCnt}>
+          <TextData />
+        </div>
+        <div className={classes.techStackInputCnt}>
+          <TechStackInput />
+        </div>
       </div>
     </div>
   );

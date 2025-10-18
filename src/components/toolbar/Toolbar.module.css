@@ -1,14 +1,31 @@
+.toolbarWrapper {
+  margin: 6rem 0rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
 .toolbarCnt {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: center;
-  min-height: 3rem;
-  width: 100%;
-  margin-top: 6rem;
-  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 3rem;
-  padding: 0rem 12rem;
-  flex-direction: row;
+  padding: 1rem 12rem;
+}
+
+.toolbarHeader {
+  font-size: 2rem;
+
+  font-weight: 800;
+  color: #444;
+}
+
+.toolbarCnt > * {
+  flex: 1 1 350px;
 }
 
 .colorsCnt,
@@ -16,13 +33,12 @@
 .techStackInputCnt {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
   height: auto;
 }
 
 .techStackInputCnt {
+  align-items: center;
+  justify-content: center;
   padding: 0rem 2rem 2rem 2rem;
   overflow: hidden;
 }

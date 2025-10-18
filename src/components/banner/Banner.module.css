@@ -60,7 +60,7 @@
 }
 
 .textHeader {
-  width: 25ch;
+  overflow: hidden;
   align-self: flex-end;
   padding: 0rem 1.5rem;
   white-space: nowrap;
@@ -78,13 +78,13 @@
   flex: 1;
   display: grid;
   text-align: center;
-  height: 100%; /* keep full height */
+  height: 100%;
   width: 100%;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 1rem;
-  row-gap: 1rem; /* visible spacing */
+  row-gap: 1rem;
   justify-content: center;
-  align-content: center; /* center rows as a block within full height */
+  align-content: center;
   padding: 1rem;
 }
 
@@ -125,6 +125,7 @@
   height: 160px;
   left: 24px;
   top: 89px;
+  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.048);
 }
 
 /* From smallest → largest, so larger ones override smaller ones */

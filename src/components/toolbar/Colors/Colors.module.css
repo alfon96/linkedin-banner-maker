@@ -9,7 +9,10 @@
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-  padding: 0rem 2rem 2rem 2rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 2rem;
 }
 
 .colorButton {
