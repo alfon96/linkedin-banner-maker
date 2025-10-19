@@ -4,7 +4,6 @@ const LEFT_WIDTH = Math.floor(WIDTH * 0.75);
 const RIGHT_WIDTH = WIDTH - LEFT_WIDTH;
 
 const ICONS_DIR = "/icons";
-
 const FALLBACK_VARIANTS = [
   "original",
   "plain",
@@ -14,16 +13,23 @@ const FALLBACK_VARIANTS = [
 ];
 
 export async function getIconSvg(tech: string): Promise<string> {
-  try {
-    const response = await fetch(`${ICONS_DIR}/${tech}/${tech}-original.svg`);
-    if (response.ok) {
-      const raw = await response.text();
-      return raw.replace(/<svg[^>]*>|<\/svg>/gi, "").trim();
+  for (const variant of FALLBACK_VARIANTS) {
+    const url = `${ICONS_DIR}/${tech}/${tech}-${variant}.svg`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) continue;
+
+      const text = await response.text();
+      if (text.includes("<html")) continue;
+
+      return text.replace(/<svg[^>]*>|<\/svg>/gi, "").trim();
+    } catch {
+      /* network failure — try next variant */
     }
-  } catch {}
-  console.warn(`⚠️ Missing icon for '${tech}'`);
+  }
   return "";
 }
+
 class Cell {
   data: string | undefined;
   active: boolean;
@@ -178,15 +184,11 @@ const createHead = (
   <rect width="${LEFT_WIDTH}" height="${HEIGHT}" fill="${left_bg}" />
   <rect x="${LEFT_WIDTH}" width="${RIGHT_WIDTH}" height="${HEIGHT}" fill="${right_bg}" />
 
-  <text x="${LEFT_WIDTH - 20}" y="${
-    HEIGHT / 2 - fontSize * 10
-  }" fill="${text_color}"
+  <text x="${LEFT_WIDTH - 20}" y="75" fill="${text_color}"
         text-anchor="end" font-weight="700" font-size="${
           fontSize * 20
         }px">${fullName}</text>
-  <text x="${LEFT_WIDTH - 20}" y="${
-    HEIGHT / 2 + fontSize * 18
-  }" fill="${text_color}"
+  <text x="${LEFT_WIDTH - 20}" y="140" fill="${text_color}"
         text-anchor="end" font-size="${fontSize * 20}px">${jobTitle}</text>`;
 };
 // Main Entry
@@ -201,8 +203,10 @@ export async function createSvg(
   colors: { left_bg: string; right_bg: string; text_color: string },
   fullName: string,
   jobTitle: string,
-  fontSize: number
+  fontSize: number,
+  signal?: AbortSignal
 ): Promise<string> {
+  if (signal?.aborted) throw new DOMException("Aborted", "AbortError");
   let svg = createHead(colors, fullName, jobTitle, fontSize);
   const techStackMatrix = transformInput(techStack);
   const cells = createCells(techStackMatrix);
@@ -223,6 +227,7 @@ export async function createSvg(
   svg += "\n</svg>";
   return svg;
 }
+
 export async function generateBannerPng(props: {
   techStack: string[];
   colors: { left_bg: string; right_bg: string; text_color: string };

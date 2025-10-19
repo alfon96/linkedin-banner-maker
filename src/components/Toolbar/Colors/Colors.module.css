@@ -1,0 +1,31 @@
+:root {
+  --size-color: 1.25rem;
+  --color-picker-bg: #b3b3b3;
+  --color-picker-bg-active: #fff;
+  --color-picker-bg-hover: #ddd;
+}
+
+.toolbarCnt {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-direction: column;
+}
+
+.preview {
+  width: 100px;
+  height: 25px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: background 0.25s ease;
+}
+
+.select {
+  border: none;
+  background-color: #fff;
+  color: #111;
+  font-size: 1rem;
+  padding: 0.25rem;
+  text-align: center;
+  border-radius: 0.5rem;
+}

@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { generateBannerPng } from "../toolbar/Download/Donwload";
-import { setLoading } from "../../inputSlice";
-import type { RootState } from "../../store";
-import classes from "./Navbar.module.css";
+import { generateBannerPng } from "./Donwload";
+import { setLoading } from "../../../inputSlice";
+import type { RootState } from "../../../store";
+import classes from "./DownloadButton.module.css";
 
-const Navbar = () => {
+const DownloadButton = () => {
   const dispatch = useDispatch();
   const {
     loading,
@@ -36,19 +36,10 @@ const Navbar = () => {
   };
 
   return (
-    <div className={classes.navbarCnt}>
-      <h1 className={classes.heaeder}>
-        Create Your Personal Dev LinkedIn Banner
-      </h1>
-      <button
-        className={classes.btn}
-        onClick={handleDownload}
-        disabled={loading}
-      >
-        {loading ? <span className={classes.loader}></span> : "Download .png"}
-      </button>
-    </div>
+    <button className={classes.btn} onClick={handleDownload} disabled={loading}>
+      {loading ? <span className={classes.loader}></span> : "Save as PNG"}
+    </button>
   );
 };
 
-export default Navbar;
+export default DownloadButton;

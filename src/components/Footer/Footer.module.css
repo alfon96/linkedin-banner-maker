@@ -1,0 +1,29 @@
+.footerCnt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 2rem 1rem;
+  margin-top: 6rem;
+  border-top: 1px solid var(--bg-darker);
+  background: var(--bg-light);
+  color: #6b7280; /* neutral gray text */
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.footerCnt a {
+  color: #1f2937;
+  margin: 0 0.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footerCnt a:hover {
+  color: #0ea5e9; /* subtle blue accent */
+}
+
+.footerCnt strong {
+  color: #111827;
+}

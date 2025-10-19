@@ -11,15 +11,15 @@ const TextData = () => {
 
   return (
     <div className={classes.textDataCnt}>
-      <label htmlFor="full-name">Full Name</label>
+      <label htmlFor="full-name">Your Name</label>
       <input
         className={classes.inputEl}
-        id={"full-name"}
+        id="full-name"
         aria-label="name"
         value={fullName}
         onChange={(e) => dispatch(setFullName(e.target.value))}
       ></input>
-      <label htmlFor="job-title">Job Title</label>
+      <label htmlFor="job-title">Your Role</label>
       <input
         className={classes.inputEl}
         id={"job-title"}
@@ -27,7 +27,7 @@ const TextData = () => {
         value={jobTitle}
         onChange={(e) => dispatch(setJobTitle(e.target.value))}
       ></input>
-      <label htmlFor="font-size">Font Size</label>
+      <label htmlFor="font-size">Text Size</label>
       <input
         className={classes.inputEl}
         id="font-size"

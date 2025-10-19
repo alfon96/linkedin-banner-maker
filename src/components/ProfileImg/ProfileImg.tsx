@@ -14,12 +14,12 @@ const ProfileImg = () => {
   };
 
   return (
-    <div className={classes.wrapper}>
+    <>
       <input
         type="file"
         accept="image/*"
         id="profile-upload"
-        style={{ display: "none" }}
+        className={classes.imgCnt}
         onChange={handleUpload}
       />
 
@@ -30,10 +30,10 @@ const ProfileImg = () => {
             style={{ backgroundImage: `url(${image})` }}
           />
         ) : (
-          "Upload Image"
+          <span className={classes.defaultText}>Upload Image</span>
         )}
       </label>
-    </div>
+    </>
   );
 };
 

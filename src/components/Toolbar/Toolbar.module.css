@@ -1,0 +1,12 @@
+.toolbarCnt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  flex-direction: column;
+  gap: 2rem;
+  flex: 1;
+  background-color: rgb(231, 241, 250);
+  padding: clamp(3rem, 2vw, 5rem);
+  border-radius: 2rem;
+}
