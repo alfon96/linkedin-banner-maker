@@ -29,6 +29,6 @@ A **React + TypeScript + Vite** web app that lets you **design and download cust
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/linkedin-banner-builder.git
+git clone https://github.com/alfon96/linkedin-banner-maker.git
 cd linkedin-banner-builder
 ```
