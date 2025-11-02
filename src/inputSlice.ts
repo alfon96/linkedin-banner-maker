@@ -34,12 +34,18 @@ interface InputState {
   selected: number;
   fullName: string;
   jobTitle: string;
-  textFontSize: number;
+  nameFontSize: number;
+  jobTitleFontSize: number;
+  techIconsSize: number;
+  letterSpacingName: number;
+  letterSpacingJobTitle: number;
   selectedTechStack: string[];
   fullNameBlock: boolean;
   jobTitleBlock: boolean;
   techBlock: boolean;
   loading: boolean;
+  nameIsBold: boolean;
+  jobTitleIsBold: boolean;
 }
 
 const initialState: InputState = {
@@ -47,12 +53,18 @@ const initialState: InputState = {
   selected: 0,
   fullName: "Sergent Pepper",
   jobTitle: "Backend Engineer",
-  textFontSize: 2.5,
+  nameFontSize: 50,
+  jobTitleFontSize: 35,
+  techIconsSize: 55,
+  letterSpacingName: 12,
+  letterSpacingJobTitle: 5,
   selectedTechStack: [],
   fullNameBlock: false,
   jobTitleBlock: false,
   techBlock: false,
   loading: false,
+  nameIsBold: false,
+  jobTitleIsBold: false,
 };
 
 const inputSlice = createSlice({
@@ -68,8 +80,20 @@ const inputSlice = createSlice({
     setJobTitle: (state, action: PayloadAction<string>) => {
       state.jobTitle = action.payload;
     },
-    setFontSize: (state, action: PayloadAction<number>) => {
-      state.textFontSize = action.payload;
+    setNameFontSize: (state, action: PayloadAction<number>) => {
+      state.nameFontSize = action.payload;
+    },
+    setJobtitleFontSize: (state, action: PayloadAction<number>) => {
+      state.jobTitleFontSize = action.payload;
+    },
+    setTechIconsSize: (state, action: PayloadAction<number>) => {
+      state.techIconsSize = action.payload;
+    },
+    setLetterSpacingName: (state, action: PayloadAction<number>) => {
+      state.letterSpacingName = action.payload;
+    },
+    setLetterSpacingJobtitle: (state, action: PayloadAction<number>) => {
+      state.letterSpacingJobTitle = action.payload;
     },
     addTechToStack: (state, action: PayloadAction<string>) => {
       if (!state.selectedTechStack.includes(action.payload))
@@ -104,6 +128,12 @@ const inputSlice = createSlice({
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
+    setNameIsBold: (state, action: PayloadAction<boolean>) => {
+      state.nameIsBold = action.payload;
+    },
+    setJobTitleIsBold: (state, action: PayloadAction<boolean>) => {
+      state.jobTitleIsBold = action.payload;
+    },
   },
 });
 
@@ -120,8 +150,14 @@ export const {
   resetJobtitleBlock,
   setTechBlock,
   resetTechBlock,
-  setFontSize,
+  setNameFontSize,
+  setJobtitleFontSize,
+  setTechIconsSize,
+  setLetterSpacingName,
+  setLetterSpacingJobtitle,
   setLoading,
+  setNameIsBold,
+  setJobTitleIsBold,
 } = inputSlice.actions;
 
 export default inputSlice.reducer;

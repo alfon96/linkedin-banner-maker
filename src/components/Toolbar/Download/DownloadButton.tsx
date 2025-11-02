@@ -6,30 +6,12 @@ import classes from "./DownloadButton.module.css";
 
 const DownloadButton = () => {
   const dispatch = useDispatch();
-  const {
-    loading,
-    selectedTechStack,
-    selected,
-    colorTheme,
-    fullName,
-    jobTitle,
-    textFontSize,
-  } = useSelector((s: RootState) => s.input);
+  const { loading } = useSelector((s: RootState) => s.input);
 
   const handleDownload = async () => {
     dispatch(setLoading(true));
     try {
-      await generateBannerPng({
-        techStack: selectedTechStack,
-        colors: {
-          left_bg: colorTheme[selected][0],
-          right_bg: colorTheme[selected][1],
-          text_color: colorTheme[selected][2],
-        },
-        fullName: fullName,
-        jobTitle: jobTitle,
-        fontSize: textFontSize,
-      });
+      await generateBannerPng();
     } finally {
       dispatch(setLoading(false));
     }

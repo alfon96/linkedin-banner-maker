@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../store";
-import { createSvg } from "../Toolbar/Download/Donwload";
-
-import classes from "./svgBanner.module.css";
+import { SimpleBanner } from "../Templates/SimpleBanner";
 import ProfileImg from "../ProfileImg/ProfileImg";
+import classes from "./svgBanner.module.css";
+import {
+  createIconsMatrix,
+  HEIGHT,
+  LEFT_WIDTH,
+  loadFontBase64,
+  RIGHT_WIDTH,
+} from "../Toolbar/Download/Donwload";
+import { setBase64, setIsLoaded } from "../../fontSlice";
 
 export default function SvgPreview() {
   const {
@@ -13,67 +20,99 @@ export default function SvgPreview() {
     colorTheme,
     fullName,
     jobTitle,
-    textFontSize,
+    nameFontSize,
+    jobTitleFontSize,
+    letterSpacingName,
+    letterSpacingJobTitle,
+    techIconsSize,
+    nameIsBold,
+    jobTitleIsBold,
   } = useSelector((s: RootState) => s.input);
 
-  const [svgContent, setSvgContent] = useState("");
+  const dispatch = useDispatch();
+  const [iconsSvg, setIconsSvg] = useState<string>("");
+  const colors = {
+    left: colorTheme[selected][0],
+    right: colorTheme[selected][1],
+    text: colorTheme[selected][2],
+  };
+
+  const { fontFamily, base64, isLoaded } = useSelector(
+    (s: RootState) => s.fonts
+  );
 
   useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
+    (async () => {
+      console.log("Loading font:", fontFamily);
+      const base64 = await loadFontBase64(fontFamily);
+      console.log("Loaded font data:", base64 ? "regular" : "none");
 
-    const renderSvg = async () => {
-      const colors = {
-        left_bg: colorTheme[selected][0],
-        right_bg: colorTheme[selected][1],
-        text_color: colorTheme[selected][2],
-      };
-
-      try {
-        const svg = await createSvg(
-          selectedTechStack,
-          Math.floor(1584 * 0.75),
-          0,
-          62,
-          1584 - Math.floor(1584 * 0.75),
-          396,
-          colors,
-          fullName,
-          jobTitle,
-          textFontSize,
-          signal
-        );
-
-        const responsiveSvg = svg.replace(
-          /<svg([^>]+)width="[^"]+"[^>]+height="[^"]+"/,
-          '<svg$1viewBox="0 0 1584 396" preserveAspectRatio="xMidYMid meet"'
-        );
-
-        if (!signal.aborted) setSvgContent(responsiveSvg);
-      } catch (err) {
-        if (err instanceof DOMException && err.name === "AbortError") return;
-        console.error("SVG generation failed:", err);
+      if (base64) {
+        dispatch(setBase64(base64));
+      } else {
+        dispatch(setBase64(null));
       }
+    })();
+
+    return () => {};
+  }, [fontFamily]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    (async () => {
+      if (!selectedTechStack || selectedTechStack.length === 0) {
+        setIconsSvg("");
+        return;
+      }
+
+      const svgString = await createIconsMatrix(
+        selectedTechStack,
+        LEFT_WIDTH,
+        0,
+        techIconsSize,
+        RIGHT_WIDTH,
+        HEIGHT
+      );
+
+      if (!cancelled && svgString) {
+        setIconsSvg(svgString);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
     };
-
-    renderSvg();
-
-    return () => controller.abort();
-  }, [
-    selectedTechStack,
-    selected,
-    colorTheme,
-    fullName,
-    jobTitle,
-    textFontSize,
-  ]);
+  }, [selectedTechStack, techIconsSize, colorTheme, selected]);
 
   return (
     <div className={classes.cnt}>
-      <div
-        className={classes.wrapper}
-        dangerouslySetInnerHTML={{ __html: svgContent }}
-      />
+      <div id="wrapper-banner" className={classes.wrapper}>
+        <SimpleBanner
+          width={1584}
+          height={396}
+          colors={colors}
+          fontFamily={fontFamily}
+          fontBase64={base64}
+          fullName={fullName}
+          fullNameIsBold={nameIsBold}
+          jobTitleIsBold={jobTitleIsBold}
+          jobTitle={jobTitle}
+          fontSizeMain={nameFontSize}
+          fontSizeSub={jobTitleFontSize}
+          letterSpacingMain={letterSpacingName}
+          letterSpacingSub={letterSpacingJobTitle}
+          extra={
+            iconsSvg ? (
+              <g
+                filter="url(#iconShadow)"
+                dangerouslySetInnerHTML={{ __html: iconsSvg }}
+              />
+            ) : null
+          }
+        />
+      </div>
+
       <div className={classes.profileCnt}>
         <ProfileImg />
       </div>
